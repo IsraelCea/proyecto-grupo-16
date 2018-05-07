@@ -131,9 +131,9 @@ namespace Entrega_2
       alumnos.Add(new Alumno(rut, nombre, apellido, email, telefono, clave, horario));
       return true;
     }
-    public bool RegistrarProfesor(string rut, string nombre, string apellido, string email, string telefono, string clave)
+    public bool RegistrarProfesor(string rut, string nombre, string apellido, string email, string telefono, string clave,List<Taller> talleresDictados)
     {
-      profesores.Add(new Profesor(rut, nombre, apellido, email, telefono, clave));
+      profesores.Add(new Profesor(rut, nombre, apellido, email, telefono, clave, talleresDictados));
       return true;
     }
     //Es necesario pasar el taller?
@@ -206,7 +206,7 @@ namespace Entrega_2
         interfaz.ErrorCredenciales(VerifyUser(credenciales));
       }
       int c = 0;
-      foreach (Taller t in talleres)
+      foreach (Taller t in talleresD)
       {
           Console.WriteLine("({0})", t.nombre, c);
           c += 1;
@@ -314,23 +314,19 @@ namespace Entrega_2
       else if (GetUser(credenciales).GetType() == typeof(Profesor))
       {
           Profesor teacher = (Profesor)GetUser(credenciales);
+          talleresD = teacher.GetTalleres();
           Option = interfaz.TeachersMenu(teachersMenu, teachersOptionMenu);
           while (!Option[1])
           {
               if (Option[0])
               {
-                Option2 = interfaz.TeachersMenu(teachersSubMenuWs, teachersOptionMenuWs);
-                //select = Int32.Parse(Console.ReadLine());
-                int select=0;
-                int i = 0;
-                talleresD = teacher.GetTalleres();
-                foreach (Taller t in talleresD)
-                {
-                  Console.WriteLine("({0})", t.nombre, i);
-                  i += 1;
-                }
+                int select =0;
                 interfaz.GreenColorConsole("Seleccione Taller:\n");
+                interfaz.MostrarTalleres(talleresD);
                 select = Int32.Parse(Console.ReadLine());
+                ws=talleresD[select-1];
+               //select = Int32.Parse(Console.ReadLine());
+                Option2 = interfaz.TeachersMenu(teachersSubMenuWs, teachersOptionMenuWs);
                 while (!Option2[3])
                 { Console.WriteLine("?"); }
               }
@@ -368,10 +364,10 @@ namespace Entrega_2
       Alumno alumno1 = new Alumno("18884427-8", "Israel", "Cea", "i@m.cl", "+56999404286", "1234", scheduleb);
       Taller futbol = new Taller("futbol", 40, 15000, schedulea, new Sala("CanchaFutbol", schedulea), new Categoria());
       Taller tenis = new Taller("tenis", 40, 15000, schedulec, new Sala("CanchaTenis", schedulec), new Categoria());
-      List<Taller> talleresDprofe1=new List<Taller>();
-      talleresDprofe1.Add(futbol);
-      talleresDprofe1.Add(tenis);
-      Profesor profesor1 = new Profesor("18234567-8", "Andres", "Howard", "a@m.cl", "+5699293949596", "1234",talleresDprofe1);
+      List<Taller> talleresD=new List<Taller>();
+      talleresD.Add(futbol);
+      talleresD.Add(tenis);
+      Profesor profesor1 = new Profesor("18234567-8", "Andres", "Howard", "a@m.cl", "+5699293949596", "1234",talleresD);
       profesores.Add(profesor1);
       talleres.Add(futbol);
       talleres.Add(tenis);

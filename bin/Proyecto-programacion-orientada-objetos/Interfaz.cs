@@ -94,10 +94,10 @@ namespace Entrega_2
     }
     public void MostrarTalleres(List<Taller> talleres)
     {
-      int i=0;
+      int i=1;
       foreach(Taller t in talleres)
       {
-        Console.WriteLine("({0})",t.nombre,i);
+        Console.WriteLine("({0}){1}", i,t.nombre);
         i += 1;
       }
         

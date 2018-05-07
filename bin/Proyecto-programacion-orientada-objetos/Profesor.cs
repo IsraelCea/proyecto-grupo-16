@@ -17,11 +17,11 @@ namespace Entrega_2
     }
 
     // Constructor sin talleres. Para que se le agreguen despues
-    public Profesor(String rut, String nombre, String apellido, String email, String telefono, String clave)
+    /*public Profesor(String rut, String nombre, String apellido, String email, String telefono, String clave)
             : base(rut, nombre, apellido, email, telefono, clave)
     {
       this.talleresDictados = new List<Taller>();
-    }
+    }*/
 
     public Boolean InscribirTaller(Taller taller)
     {
@@ -38,5 +38,7 @@ namespace Entrega_2
     {
 
     }
+    
+
   }
 }
