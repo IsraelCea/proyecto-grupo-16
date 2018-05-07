@@ -187,10 +187,11 @@ namespace Entrega_2
     }
     public void Menu()
     {
-      if (!LoadData())
+      /*if (!LoadData())
       {
         InicializaUsuariosIniciales();
-      }
+      }*/
+      InicializaUsuariosIniciales();
       Interfaz interfaz = new Interfaz();
       List<String> credenciales = new List<String> { "", "" };
       List<Boolean> Option = new List<Boolean>();
@@ -204,7 +205,12 @@ namespace Entrega_2
         credenciales = interfaz.LogInLogOut();
         interfaz.ErrorCredenciales(VerifyUser(credenciales));
       }
-
+      int c = 0;
+      foreach (Taller t in talleres)
+      {
+          Console.WriteLine("({0})", t.nombre, c);
+          c += 1;
+      }
 
       //Menu Estudiante
       if (GetUser(credenciales).GetType() == typeof(Alumno))
@@ -318,7 +324,7 @@ namespace Entrega_2
                 int select=0;
                 int i = 0;
                 talleresD = teacher.GetTalleres();
-                foreach (Taller t in teacher.talleresDictados)
+                foreach (Taller t in talleresD)
                 {
                   Console.WriteLine("({0})", t.nombre, i);
                   i += 1;
